@@ -1,0 +1,12 @@
+node_modules
+var.js
+.expo
+npm-debug.*
+*.jks
+*.p8
+*.key
+*.mobileprovision
+*.orig.*
+*.p12
+web-build
+web-report
