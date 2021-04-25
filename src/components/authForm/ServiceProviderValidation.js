@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Text, Dimensions, Picker, Image } from 'react-native';
+import { TouchableOpacity, View, StyleSheet, Text, Dimensions, Picker, Image } from 'react-native';
 import MainButton from '../MainButton'
 import colors from '../../constants/colors';
 import * as Location from 'expo-location';
@@ -22,12 +22,14 @@ const ServiceProviderValidation = (props) => {
     const [existingUser, setExistingUser] = useState(null)
     const [pinCode, setPinCode] = useState(null);
     const [submitting, setSubmitting] = useState(false);
+    const [locationLoading, setLocationLoading] = useState(false);
     const [uri, setUri] = useState(null);
     const [imageUrl, setImageUrl] = useState(null);
 
     const [typeOfServiceProviders, setTypeofServiceProviders] = useState(['Barber', 'Electrician', 'Mechanic', 'Car Washer', 'Plumber',])
 
     const onGetLocation = async () => {
+        setLocationLoading(true);
         let { status } = await Location.requestPermissionsAsync();
         if (status !== 'granted') {
             setLocationError('Permission to access location was denied');
@@ -42,6 +44,7 @@ const ServiceProviderValidation = (props) => {
         } catch (error) {
             setLocationError('Permission to access location was denied');
         }
+        setLocationLoading(false);
     }
 
     const onSubmit = async () => {
@@ -123,7 +126,7 @@ const ServiceProviderValidation = (props) => {
 
     return (
         <View style={styles.formContainer}>
-            {error ? <Text style={{ color: 'red' }}> {error} </Text> : <></>}
+            {error && <Text style={{ color: 'red' }}>{error}</Text>}
             <Picker
                 style={styles.onePicker} itemStyle={styles.onePickerItem}
                 mode='dropdown'
@@ -163,7 +166,7 @@ const ServiceProviderValidation = (props) => {
                     </View>
                 </TouchableOpacity>
             }
-            {locationError && <Text style={{ color: 'red' }}> {locationError} </Text>}
+            {locationError && <Text style={{ color: 'red' }}>{locationError}</Text>}
             <MainButton
                 style={{ marginTop: 5 }}
                 onPress={onSubmit}>Register</MainButton>
