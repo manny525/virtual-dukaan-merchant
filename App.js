@@ -13,6 +13,8 @@ import ordersReducer from './src/store/reducers/orders';
 import serviceRequestReducer from './src/store/reducers/serviceRequest';
 import Header from './src/components/Header';
 
+console.disableYellowBox = true;
+
 const rootReducer = combineReducers({
   user: userReducer,
   inventory: inventoryReducer,
