@@ -175,7 +175,7 @@ const GoodsProviderValidation = (props) => {
                         />
                     </MapView> :
                     <TouchableOpacity activeOpacity={0.6} onPress={onGetLocation} disabled={locationLoading}>
-                        <View style={{ ...styles.button, paddingHorizontal: 15, backgroundColor: colors.secondary }}>
+                        <View style={{ ...styles.button, paddingHorizontal: 15, backgroundColor: colors.secondary, marginTop: '1%' }}>
                             <Text style={{ ...styles.buttonText }}>{locationLoading ? 'Loading...' : 'Get Location'}</Text>
                         </View>
                     </TouchableOpacity>
